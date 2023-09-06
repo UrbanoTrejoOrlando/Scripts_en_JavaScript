@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejercicio29</title>
+</head>
+<body>
+    <h1>Registro de Calificaciones</h1>
+    
+    <label for="materia">Asignatura:</label>
+    <input type="text" id="materia"><br>
+    
+    <h2>Calificaciones en las unidades:</h2>
+    <ul id="calificacionesList">
+        <li><input type="number" class="calificacion" placeholder="Unidad 1"></li>
+        <li><input type="number" class="calificacion" placeholder="Unidad 2"></li>
+        <li><input type="number" class="calificacion" placeholder="Unidad 3"></li>
+        <li><input type="number" class="calificacion" placeholder="Unidad 4"></li>
+        <li><input type="number" class="calificacion" placeholder="Unidad 5"></li>
+    </ul>
+	<!Crear boton>    
+    <button onclick="calcularPromedio()">Calcular Promedio</button>
+    
+    <p id="resultado"></p>
+	<! Conectar el HTML con el JavaScript>
+    <script src="Ejercicio29.js"></script>
+</body>
+</html>
+
