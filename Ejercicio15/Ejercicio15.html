@@ -1,22 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Ejercicio15</title>
+    <meta charset="UTF-8">
+    <title>Ejercicio 15 - Descuento Medicamento</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body>
-    <h1>Descuento de un medicamento</h1>
-    
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre"><br>
-    
-    <label for="precio">Precio del medicamento:</label>
-    <input type="number" id="precio"><br>
- 	<!Crear boton>   
-    <button onclick="calcularDescuento()">Calcular Descuento</button>
-    
-    <p id="resultado"></p>
-	<!Conectar el HTML con el JavaScript>
-    <script src="Ejercicio15.js"></script>
+<body class=" min-h-screen flex items-center justify-center p-4">
+
+    <div class="bg-white rounded-xl shadow-lg p-6 w-full max-w-md">
+        <h1 class="text-2xl font-bold text-center text-green-700 mb-6">Descuento de Medicamento</h1>
+
+        <div class="mb-4">
+            <label for="nombre" class="block text-gray-700 font-medium mb-1">Nombre:</label>
+            <input type="text" id="nombre" class="w-full p-2 border border-gray-300 rounded-md" placeholder="Ej. Juan Pérez">
+        </div>
+
+        <div class="mb-4">
+            <label for="precio" class="block text-gray-700 font-medium mb-1">Precio del medicamento:</label>
+            <input type="number" id="precio" class="w-full p-2 border border-gray-300 rounded-md" placeholder="Ej. 250">
+        </div>
+
+        <button onclick="calcularDescuento()" class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition">
+            Calcular Descuento
+        </button>
+
+        <p id="resultado" class="mt-6 text-center text-lg font-semibold text-green-800"></p>
+    </div>
+
+    <script>
+        function calcularDescuento() {
+            const nombre = document.getElementById("nombre").value.trim();
+            const precio = parseFloat(document.getElementById("precio").value);
+            const resultado = document.getElementById("resultado");
+
+            if (!nombre || isNaN(precio) || precio <= 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Datos incompletos',
+                    text: 'Por favor, ingresa tu nombre y un precio válido.'
+                });
+                resultado.textContent = "";
+                return;
+            }
+
+            const total = precio - (precio * 0.35);
+            const mensaje = `Cliente ${nombre}, el total a pagar con 35% de descuento es: $${total.toFixed(2)}`;
+
+            resultado.textContent = mensaje;
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Descuento aplicado',
+                text: mensaje,
+                confirmButtonText: 'Aceptar'
+            });
+        }
+    </script>
+
 </body>
 </html>
-
