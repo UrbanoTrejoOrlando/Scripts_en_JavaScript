@@ -1,25 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Ejercicio17</title>
+    <meta charset="UTF-8">
+    <title>Ejercicio 17 - Conversiones</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body>
-    <h1>Conversiones</h1>
-    
-    <label for="opcion">Elige una opción:</label>
-    <select id="opcion">
-        <option value="1">Euros a Dólares</option>
-        <option value="2">Dólares a Euros</option>
-    </select><br>
-    
-    <label for="dinero">Dinero:</label>
-    <input type="number" id="dinero"><br>
-    <!Crear Boton>  
-    <button onclick="realizarConversion()">Realizar Conversión</button>
-    
-    <p id="resultado"></p>
-	<!Conectar el HTML con el JavaScript>
-    <script src="Ejercicio14.js"></script>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+    <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Conversor de Moneda</h1>
+
+        <div class="mb-4">
+            <label for="opcion" class="block text-gray-700 mb-1">Elige una opción:</label>
+            <select id="opcion" class="w-full p-2 border border-gray-300 rounded-md">
+                <option value="1">Euros a Dólares</option>
+                <option value="2">Dólares a Euros</option>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label for="dinero" class="block text-gray-700 mb-1">Cantidad de dinero:</label>
+            <input type="number" id="dinero" class="w-full p-2 border border-gray-300 rounded-md" placeholder="Ej. 100">
+        </div>
+
+        <button onclick="realizarConversion()" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition">
+            Realizar Conversión
+        </button>
+
+        <p id="resultado" class="mt-6 text-center text-lg font-semibold text-gray-700"></p>
+    </div>
+
+    <script>
+        function realizarConversion() {
+            const dolar = 16.89;
+            const euro = 0.0053;
+            const opcion = parseInt(document.getElementById("opcion").value);
+            const dinero = parseFloat(document.getElementById("dinero").value);
+            const resultado = document.getElementById("resultado");
+
+            if (isNaN(dinero) || dinero <= 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Valor inválido',
+                    text: 'Por favor ingresa una cantidad de dinero válida.'
+                });
+                resultado.textContent = "";
+                return;
+            }
+
+            let total = 0;
+            let mensaje = "";
+
+            if (opcion === 1) {
+                total = dinero * dolar;
+                mensaje = `${dinero} euros equivalen a $${total.toFixed(2)} dólares.`;
+            } else if (opcion === 2) {
+                total = dinero * euro;
+                mensaje = `${dinero} dólares equivalen a €${total.toFixed(2)} euros.`;
+            } else {
+                mensaje = "Opción no válida";
+            }
+
+            resultado.textContent = mensaje;
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Conversión realizada',
+                text: mensaje,
+                confirmButtonText: 'Aceptar'
+            });
+        }
+    </script>
+
 </body>
 </html>
-
