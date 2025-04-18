@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio - Pagos de Clientes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white shadow-xl rounded-xl p-8 w-full max-w-3xl">
+        <h1 class="text-2xl font-bold text-center text-indigo-700 mb-6">Cálculo de Pagos de Clientes</h1>
+
+        <label class="block font-medium mb-2" for="numClientes">Número de clientes:</label>
+        <input id="numClientes" type="number" class="w-full p-2 border rounded-md mb-4" placeholder="Ej. 3">
+
+        <button onclick="calcularPagos()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-xl transition">
+            Ingresar Datos
+        </button>
+
+        <div id="clientesContainer" class="space-y-4 mt-6"></div>
+        <div id="resultados" class="mt-8 space-y-4 text-lg font-medium text-gray-800"></div>
+    </div>
+
+    <script>
+        function calcularPagos() {
+            const num = parseInt(document.getElementById("numClientes").value);
+            const container = document.getElementById("clientesContainer");
+            const resultados = document.getElementById("resultados");
+
+            if (isNaN(num) || num <= 0) {
+                Swal.fire("Error", "Por favor ingresa un número válido de clientes", "error");
+                return;
+            }
+
+            container.innerHTML = "";
+            resultados.innerHTML = "";
+
+            for (let i = 0; i < num; i++) {
+                const div = document.createElement("div");
+                div.className = "p-4 border rounded-md bg-gray-50";
+
+                div.innerHTML = `
+                    <label class="block mb-1">Nombre del cliente ${i + 1}:</label>
+                    <input type="text" id="nombre${i}" class="w-full p-2 mb-2 border rounded-md">
+
+                    <label class="block mb-1">Saldo anterior:</label>
+                    <input type="number" id="saldoAnterior${i}" class="w-full p-2 mb-2 border rounded-md">
+
+                    <label class="block mb-1">Último depósito:</label>
+                    <input type="number" id="deposito${i}" class="w-full p-2 mb-2 border rounded-md">
+
+                    <label class="block mb-1">Monto por ventas:</label>
+                    <input type="number" id="montoCompras${i}" class="w-full p-2 border rounded-md">
+                `;
+
+                container.appendChild(div);
+            }
+
+            const btn = document.createElement("button");
+            btn.textContent = "Calcular Resultados";
+            btn.className = "w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-xl transition";
+            btn.onclick = () => mostrarResultados(num);
+            container.appendChild(btn);
+        }
+
+        function mostrarResultados(num) {
+            const resultados = document.getElementById("resultados");
+            resultados.innerHTML = "";
+
+            for (let i = 0; i < num; i++) {
+                const nombre = document.getElementById("nombre" + i).value;
+                const saldoAnterior = parseFloat(document.getElementById("saldoAnterior" + i).value);
+                const deposito = parseFloat(document.getElementById("deposito" + i).value);
+                const montoCompras = parseFloat(document.getElementById("montoCompras" + i).value);
+
+                if (!nombre || isNaN(saldoAnterior) || isNaN(deposito) || isNaN(montoCompras)) {
+                    Swal.fire("Error", `Datos inválidos para el cliente ${i + 1}`, "error");
+                    return;
+                }
+
+                const saldoActual = saldoAnterior + montoCompras - deposito;
+
+                const pagoActual = (saldoActual * 0.12 + 200).toFixed(2);
+                const pagoMinimo = (saldoActual * 0.15).toFixed(2);
+                const pagoSinIntereses = (saldoActual * 0.85).toFixed(2);
+
+                const p = document.createElement("p");
+                p.innerHTML = `Cliente <strong>${nombre}</strong><br>
+                    Saldo actual: <span class="text-indigo-600 font-bold">$${saldoActual.toFixed(2)}</span><br>
+                    Pago actual: <span class="text-green-600">$${pagoActual}</span><br>
+                    Pago mínimo: <span class="text-yellow-600">$${pagoMinimo}</span><br>
+                    Para no generar intereses: <span class="text-red-600">$${pagoSinIntereses}</span>`;
+
+                resultados.appendChild(p);
+            }
+
+            Swal.fire("¡Listo!", "Resultados generados correctamente", "success");
+        }
+    </script>
+</body>
+</html>
