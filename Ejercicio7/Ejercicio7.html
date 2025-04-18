@@ -1,20 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Ejercicio7</title>
+    <meta charset="UTF-8">
+    <title>Ejercicio 7 - Calificaciones</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body>
-    <h1>Calificaciones de Alumnos</h1>
-    
-    <label for="cantidadAlumnos">Cantidad de alumnos:</label>
-    <input type="number" id="cantidadAlumnos">
-	<!Creacion del boton_>
-    <button onclick="ingresarCalificaciones()">Ingresar Calificaciones</button>
-    
-    <div id="calificacionesContainer"></div>
-    <div id="resultados"></div>
-	<!Concetar el HTML con el JavaScript>
-    <script src="Ejercicio7.js"></script>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-xl">
+        <h1 class="text-2xl font-bold mb-6 text-center text-green-700">Calificaciones de Alumnos</h1>
+
+        <label for="cantidadAlumnos" class="block mb-2 font-medium">Cantidad de alumnos:</label>
+        <input type="number" id="cantidadAlumnos" class="w-full mb-4 p-2 border rounded-md" placeholder="Ej. 5">
+
+        <button onclick="ingresarCalificaciones()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-xl transition duration-300 mb-4">
+            Ingresar Calificaciones
+        </button>
+
+        <div id="calificacionesContainer" class="space-y-2"></div>
+        <div id="resultados" class="mt-6 space-y-1 text-gray-800 font-medium"></div>
+    </div>
+
+    <script>
+        function ingresarCalificaciones() {
+            const cantidadAlumnos = parseInt(document.getElementById("cantidadAlumnos").value);
+            const contenedor = document.getElementById("calificacionesContainer");
+            const resultados = document.getElementById("resultados");
+
+            // Validar entrada
+            if (isNaN(cantidadAlumnos) || cantidadAlumnos <= 0) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Atención",
+                    text: "Ingresa una cantidad válida de alumnos"
+                });
+                return;
+            }
+
+            contenedor.innerHTML = "";
+            resultados.innerHTML = "";
+
+            for (let i = 0; i < cantidadAlumnos; i++) {
+                const input = document.createElement("input");
+                input.type = "number";
+                input.placeholder = `Calificación del alumno ${i + 1}`;
+                input.className = "w-full p-2 border rounded-md";
+                contenedor.appendChild(input);
+            }
+
+            const calcularButton = document.createElement("button");
+            calcularButton.textContent = "Calcular Resultados";
+            calcularButton.className = "w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl transition duration-300";
+            calcularButton.onclick = () => calcularResultados(cantidadAlumnos);
+            contenedor.appendChild(calcularButton);
+        }
+
+        function calcularResultados(cantidad) {
+            const contenedor = document.getElementById("calificacionesContainer");
+            const resultados = document.getElementById("resultados");
+            resultados.innerHTML = "";
+
+            let aprobados = 0;
+            let reprobados = 0;
+
+            for (let i = 0; i < cantidad; i++) {
+                const calificacion = parseFloat(contenedor.children[i].value);
+
+                if (isNaN(calificacion)) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: `Ingresa una calificación válida para el alumno ${i + 1}`
+                    });
+                    return;
+                }
+
+                const estado = calificacion >= 70 ? "Aprobado ✅" : "Reprobado ❌";
+                if (calificacion >= 70) aprobados++;
+                else reprobados++;
+
+                const resultado = document.createElement("p");
+                resultado.textContent = `Alumno ${i + 1}: ${estado}`;
+                resultados.appendChild(resultado);
+            }
+
+            // Mostrar resumen con SweetAlert
+            Swal.fire({
+                icon: "info",
+                title: "Resumen",
+                html: `Total de alumnos: <b>${cantidad}</b><br>
+                       Aprobados: <b class="text-green-600">${aprobados}</b><br>
+                       Reprobados: <b class="text-red-600">${reprobados}</b>`
+            });
+        }
+    </script>
 </body>
 </html>
-
