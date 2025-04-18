@@ -1,16 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Ejercicio 1</title>
+  <meta charset="UTF-8">
+  <title>Calificación con estilo</title>
+
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- SweetAlert2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body>
-    <h1>Determinar Calificación</h1>
-    <label for="calificacion">Ingresa la calificación obtenida (0-10): </label>
-	
-    <input type="number" id="calificacion">
-	<button onclick="determinarCalificacion()">Calcular</button>
-    <p id="resultado"></p>
-    <script src="Ejercicio1.js"></script>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div class="bg-white p-12 rounded-xl shadow-md w-full max-w-md text-center">
+    <h1 class="text-4xl font-bold text-gray-800 mb-6">📘 Determinar Calificación</h1>
+    
+    <label for="calificacion" class="block mb-3 text-xl text-gray-700">Ingresa la calificación (0-10):</label>
+    
+    <input 
+      type="number" 
+      id="calificacion" 
+      class="w-full p-3 border border-gray-300 rounded-lg mb-6 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      min="0" 
+      max="10"
+    >
+
+    <button 
+      onclick="determinarCalificación()" 
+      class="bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-lg text-lg transition-all"
+    >
+      Calcular
+    </button>
+
+    <footer class="mt-8 text-base text-gray-500">
+      Orlando Urbano Trejo · orlandourbanotrejo@gmail.com
+    </footer>
+  </div>
+
+  <script>
+    function determinarCalificación() {
+      const calificacion = parseInt(document.getElementById("calificacion").value);
+
+      let mensaje = '';
+      let icono = 'info';
+
+      switch (calificacion) {
+        case 0: case 1: case 2: case 3: case 4: case 5:
+          mensaje = 'Tu calificación es: F';
+          icono = 'error';
+          break;
+        case 6:
+        case 7:
+          mensaje = 'Tu calificación es: D';
+          icono = 'warning';
+          break;
+        case 8:
+          mensaje = 'Tu calificación es: C';
+          icono = 'info';
+          break;
+        case 9:
+          mensaje = 'Tu calificación es: B';
+          icono = 'success';
+          break;
+        case 10:
+          mensaje = 'Tu calificación es: A 🎉';
+          icono = 'success';
+          break;
+        default:
+          mensaje = '⚠️ Calificación inválida. Ingresa un número del 0 al 10.';
+          icono = 'question';
+          break;
+      }
+
+      Swal.fire({
+        title: 'Resultado',
+        text: mensaje,
+        icon: icono,
+        confirmButtonColor: '#4CAF50'
+      });
+    }
+  </script>
+
 </body>
 </html>
-
