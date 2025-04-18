@@ -1,16 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Ejercicio17</title>
+    <meta charset="UTF-8">
+    <title>Ejercicio 17 - Cantidad de Dinero</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body>
-    <h1>Cantidad de dinero</h1>
-    
-    <div id="cajeroContainer"></div>
-    
-    <p id="total"></p>
-    <!Concetar el HTML con el JavaScript> 
-    <script src="Ejercicio17.js"></script>
+<body class=" min-h-screen flex items-center justify-center p-6">
+
+    <div class="bg-white rounded-xl shadow-lg p-6 w-full max-w-md">
+        <h1 class="text-2xl font-bold text-center text-yellow-700 mb-6">Cantidad Total de Dinero</h1>
+
+        <div id="cajeroContainer" class="space-y-4"></div>
+
+        <p id="total" class="text-center font-bold text-xl text-yellow-700 mt-4"></p>
+    </div>
+
+    <script>
+        const cajero = [1000, 500, 200, 100, 50, 20, 10, 5, 2, 1, 0.50];
+
+        function calcularTotal() {
+            let total = 0;
+            for (let i = 0; i < cajero.length; i++) {
+                const cantidad = parseFloat(document.getElementById("cantidad" + i).value) || 0;
+                total += cantidad * cajero[i];
+            }
+
+            document.getElementById("total").textContent = `Total: $${total.toFixed(2)}`;
+
+            Swal.fire({
+                icon: 'info',
+                title: 'Total Calculado',
+                text: `Tienes un total de $${total.toFixed(2)} en efectivo.`,
+                confirmButtonText: 'Aceptar'
+            });
+        }
+
+        const cajeroContainer = document.getElementById("cajeroContainer");
+
+        cajero.forEach((valor, i) => {
+            const div = document.createElement("div");
+            div.innerHTML = `
+                <label class="block font-medium text-gray-700 mb-1">Cantidad de billetes/monedas de $${valor}:</label>
+                <input type="number" id="cantidad${i}" step="any" class="w-full border border-gray-300 rounded-md p-2">
+            `;
+            cajeroContainer.appendChild(div);
+        });
+
+        const totalButton = document.createElement("button");
+        totalButton.textContent = "Calcular Total";
+        totalButton.className = "w-full bg-yellow-500 text-white py-2 rounded-md mt-4 hover:bg-yellow-600 transition";
+        totalButton.onclick = calcularTotal;
+        cajeroContainer.appendChild(totalButton);
+    </script>
 </body>
 </html>
-
