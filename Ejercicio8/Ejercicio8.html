@@ -1,23 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Ejercicio8</title>
+    <meta charset="UTF-8">
+    <title>Ejercicio 8 - Consumo de Agua</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body>
-    <h1>Consumo de agua</h1>
+<body class="bg-blue-50 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-6 text-center text-blue-700">Consumo de Agua</h1>
 
-    <label for="precio">Precio por metro: </label>
-    <input type="number" id="precio"><br>
+        <label for="precio" class="block mb-2 font-medium">Precio por metro cúbico:</label>
+        <input type="number" id="precio" class="w-full mb-4 p-2 border rounded-md" placeholder="Ej. 12.5">
 
-    <label for="metros">Metros trabajados: </label>
-    <input type="number" id="metros"><br>
-	<!Creacion cel Boton>
-    <button onclick="precioDelAgua()">Calcular</button>
+        <label for="metros" class="block mb-2 font-medium">Metros cúbicos consumidos:</label>
+        <input type="number" id="metros" class="w-full mb-4 p-2 border rounded-md" placeholder="Ej. 80">
 
-    <p id="total"></p>
-	<!Conectar el HTML con el JavaScript>
-    <script src="Ejercicio8.js"></script>
+        <button onclick="precioDelAgua()" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl transition duration-300">
+            Calcular
+        </button>
+
+        <p id="total" class="mt-6 text-xl font-medium text-gray-800"></p>
+    </div>
+
+    <script>
+        function precioDelAgua() {
+            const precio = parseFloat(document.getElementById("precio").value);
+            const metros = parseFloat(document.getElementById("metros").value);
+
+            if (isNaN(precio) || isNaN(metros) || precio < 0 || metros < 0) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Entrada inválida",
+                    text: "Por favor, ingresa valores válidos en ambos campos."
+                });
+                return;
+            }
+
+            const total = (precio * metros).toFixed(2);
+
+            // Mostrar resultado con SweetAlert y también en el párrafo
+            document.getElementById("total").textContent = `Pago: $${total}`;
+
+            Swal.fire({
+                icon: "success",
+                title: "Cálculo exitoso",
+                text: `El pago por el consumo de agua es: $${total}`
+            });
+        }
+    </script>
 </body>
 </html>
-
-
