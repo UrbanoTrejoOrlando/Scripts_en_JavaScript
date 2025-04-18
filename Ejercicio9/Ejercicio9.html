@@ -1,21 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Ejercicio9</title>
+    <meta charset="UTF-8">
+    <title>Ejercicio 9 - Salarios de Empleados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body>
-    <h1>Salarios de Empleados</h1>
-    
-    <label for="numTrabajadores">Número de trabajadores:</label>
-    <input type="number" id="numTrabajadores">
-    
-    <div id="trabajadoresContainer"></div>
-	<!Crear boton> 
-    <button onclick="calcularSalarios()">Ingresar Calificaciones</button>
-    
-    <div id="resultados"></div>
-	<!Conectar el HTML con el JavaScript>
-    <script src="Ejercicio9.js"></script>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-xl shadow-xl w-full max-w-2xl">
+        <h1 class="text-2xl font-bold mb-6 text-center text-purple-700">Salarios de Empleados</h1>
+
+        <label for="numTrabajadores" class="block font-medium mb-2">Número de trabajadores:</label>
+        <input type="number" id="numTrabajadores" class="w-full p-2 mb-4 border rounded-md" placeholder="Ej. 3">
+
+        <button onclick="calcularSalarios()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-xl mb-6 transition">
+            Ingresar Datos
+        </button>
+
+        <div id="trabajadoresContainer" class="space-y-4"></div>
+        <div id="resultados" class="mt-6 space-y-2 text-gray-800 text-lg font-medium"></div>
+    </div>
+
+    <script>
+        function calcularSalarios() {
+            const num = parseInt(document.getElementById("numTrabajadores").value);
+            const container = document.getElementById("trabajadoresContainer");
+            const resultados = document.getElementById("resultados");
+
+            if (isNaN(num) || num <= 0) {
+                Swal.fire("Error", "Por favor ingresa un número válido de trabajadores", "error");
+                return;
+            }
+
+            container.innerHTML = "";
+            resultados.innerHTML = "";
+
+            for (let i = 0; i < num; i++) {
+                const div = document.createElement("div");
+                div.className = "p-4 border rounded-md bg-gray-50";
+
+                div.innerHTML = `
+                    <label class="block mb-1">Nombre del trabajador ${i + 1}:</label>
+                    <input type="text" id="nombre${i}" class="w-full p-2 mb-2 border rounded-md">
+
+                    <label class="block mb-1">Horas trabajadas:</label>
+                    <input type="number" id="horas${i}" class="w-full p-2 mb-2 border rounded-md">
+
+                    <label class="block mb-1">Sueldo por hora:</label>
+                    <input type="number" id="salario${i}" class="w-full p-2 border rounded-md">
+                `;
+
+                container.appendChild(div);
+            }
+
+            const btn = document.createElement("button");
+            btn.textContent = "Calcular Resultados";
+            btn.className = "w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-xl transition";
+            btn.onclick = () => mostrarResultados(num);
+            container.appendChild(btn);
+        }
+
+        function mostrarResultados(num) {
+            const resultados = document.getElementById("resultados");
+            resultados.innerHTML = "";
+
+            for (let i = 0; i < num; i++) {
+                const nombre = document.getElementById("nombre" + i).value;
+                const horas = parseFloat(document.getElementById("horas" + i).value);
+                const salario = parseFloat(document.getElementById("salario" + i).value);
+
+                if (!nombre || isNaN(horas) || isNaN(salario) || horas < 0 || salario < 0) {
+                    Swal.fire("Error", `Datos inválidos para el trabajador ${i + 1}`, "error");
+                    return;
+                }
+
+                const sueldoBruto = horas * salario;
+                let descuento = 0;
+
+                if (salario <= 150) {
+                    descuento = sueldoBruto * 0.5;
+                } else if (salario <= 300) {
+                    descuento = sueldoBruto * 0.3;
+                } else if (salario <= 450) {
+                    descuento = sueldoBruto * 0.1;
+                }
+
+                const sueldoNeto = (sueldoBruto - descuento).toFixed(2);
+
+                const p = document.createElement("p");
+                p.innerHTML = `Trabajador <strong>${nombre}</strong> - Salario neto: <span class="text-green-600">$${sueldoNeto}</span>`;
+                resultados.appendChild(p);
+            }
+
+            Swal.fire("¡Listo!", "Resultados calculados correctamente", "success");
+        }
+    </script>
 </body>
 </html>
-
