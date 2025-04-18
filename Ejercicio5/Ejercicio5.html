@@ -1,22 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Ejercicio5</title>
+  <meta charset="UTF-8">
+  <title>Ejercicio 5 - Número de Ventas</title>
+
+  <!-- TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body>
-    <h1>Numero de ventas</h1>
-    
-    <label for="ventas">Numero de ventas: </label>
-    <input type="number" id="ventas">
-    
-    <div id="ventasContainer"></div>
-   	<!Creacion del boton> 
-    <button onclick="calcularTotales()">Calcular Totales</button>
-    
-    <p id="totalFinal"></p>
-    <p id="totalMenor1000"></p>
-	<!Conectar el HTML con el JavaScript>
-    <script src="Ejercicio5.js"></script>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+  <div class="bg-white p-10 rounded-2xl shadow-lg w-full max-w-xl text-center">
+    <h1 class="text-3xl font-bold text-indigo-600 mb-6">🧾 Número de Ventas</h1>
+
+    <label for="ventas" class="block text-left font-semibold text-gray-700 mb-2">Número de ventas:</label>
+    <input 
+      type="number" 
+      id="ventas" 
+      class="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+      placeholder="Ingresa el número de ventas"
+    />
+
+    <div id="ventasContainer" class="space-y-3 mb-6"></div>
+
+    <button 
+      onclick="calcularTotales()" 
+      class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg transition"
+    >
+      Calcular Totales
+    </button>
+
+    <p id="totalFinal" class="mt-6 text-lg font-semibold text-gray-800"></p>
+    <p id="totalMenor1000" class="text-lg font-semibold text-gray-800"></p>
+
+   
+  </div>
+
+  <script>
+    function agregarVenta() {
+      const ventasContainer = document.getElementById("ventasContainer");
+      const numVentas = parseInt(document.getElementById("ventas").value);
+
+      ventasContainer.innerHTML = "";
+
+      if (isNaN(numVentas) || numVentas <= 0) return;
+
+      for (let i = 0; i < numVentas; i++) {
+        const input = document.createElement("input");
+        input.type = "number";
+        input.placeholder = `Precio de la venta ${i + 1}`;
+        input.className = "w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300";
+        ventasContainer.appendChild(input);
+      }
+    }
+
+    function calcularTotales() {
+      const ventas = parseInt(document.getElementById("ventas").value);
+      const container = document.getElementById("ventasContainer").children;
+      
+      if (isNaN(ventas) || ventas <= 0 || container.length !== ventas) {
+        Swal.fire({
+          title: "Datos incompletos",
+          text: "Por favor asegúrate de ingresar todas las ventas.",
+          icon: "error",
+          confirmButtonColor: "#6366f1"
+        });
+        return;
+      }
+
+      let totalFinal = 0;
+      let totalMenor1000 = 0;
+
+      for (let i = 0; i < ventas; i++) {
+        const precio = parseFloat(container[i].value);
+
+        if (isNaN(precio) || precio < 0) {
+          Swal.fire({
+            title: "Entrada inválida",
+            text: `La venta ${i + 1} contiene un valor no válido.`,
+            icon: "warning",
+            confirmButtonColor: "#6366f1"
+          });
+          return;
+        }
+
+        totalFinal += precio;
+        if (precio < 1000) totalMenor1000 += precio;
+      }
+
+      document.getElementById("totalFinal").textContent = `💰 Total Final: $${totalFinal.toFixed(2)}`;
+      document.getElementById("totalMenor1000").textContent = `🧾 Total de ventas menores a $1000: $${totalMenor1000.toFixed(2)}`;
+
+      Swal.fire({
+        title: "✅ Totales Calculados",
+        html: `<p>Total: <strong>$${totalFinal.toFixed(2)}</strong></p><p>Menores a $1000: <strong>$${totalMenor1000.toFixed(2)}</strong></p>`,
+        icon: "success",
+        confirmButtonColor: "#6366f1"
+      });
+    }
+
+    document.getElementById("ventas").addEventListener("change", agregarVenta);
+  </script>
 </body>
 </html>
-
