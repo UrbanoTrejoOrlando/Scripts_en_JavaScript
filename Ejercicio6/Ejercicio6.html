@@ -1,21 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Ejercicio6</title>
+    <meta charset="UTF-8">
+    <title>Ejercicio 6 - Costo de una Llamada</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body>
-    <h1>Costo de una llamada</h1>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-6 text-center text-green-700">Costo de una Llamada</h1>
 
-    <label for="tiempo">Tiempo de la llamada en minutos: </label>
-    <input type="number" id="tiempo"><br>
+        <label for="tiempo" class="block mb-2 font-medium">Tiempo de la llamada en minutos:</label>
+        <input type="number" id="tiempo" class="w-full mb-4 p-2 border rounded-md" placeholder="Ej. 10">
 
-    <label for="costo">Costo por minuto en pesos: </label>
-    <input type="number" id="costo"><br>
-    <! Creacion del boton>
-    <button onclick="CostoLlamada()">Calcular</button>
+        <label for="costo" class="block mb-2 font-medium">Costo por minuto en pesos:</label>
+        <input type="number" id="costo" class="w-full mb-4 p-2 border rounded-md" placeholder="Ej. 2.5">
 
-    <p id="total"></p>
-	<!Conectar el HTML con el JavaScript>
-    <script src="Ejercicio6.js"></script>
+        <button onclick="CostoLlamada()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-xl transition duration-300">
+            Calcular
+        </button>
+        <p id="total" class="mt-6 text-xl font-medium text-gray-800"></p>
+    </div>
+
+    <script>
+        function CostoLlamada() {
+            const tiempo = parseFloat(document.getElementById("tiempo").value);
+            const costo = parseFloat(document.getElementById("costo").value);
+
+            if (isNaN(tiempo) || isNaN(costo) || tiempo < 0 || costo < 0) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Por favor ingresa valores válidos en ambos campos."
+                });
+                return;
+            }
+
+            const total = (tiempo * costo).toFixed(2);
+
+            Swal.fire({
+                icon: "success",
+                title: "Costo calculado",
+                text: `El costo total de la llamada es: $${total}`
+            });
+
+            document.getElementById("total").textContent = `Costo total: $${total}`;
+        }
+    </script>
 </body>
-
+</html>
