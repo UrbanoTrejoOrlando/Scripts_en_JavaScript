@@ -1,25 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Ejercicio31</title>
+    <meta charset="UTF-8">
+    <title>Ejercicio31 - Cafetería</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body>
-    <h1>Cafetería</h1>
-    <label for="opciones">Elige una opción:</label>
-    <select id="opciones">
-        <option value="1">Pelota Verde</option>
-        <option value="2">Pelota Roja</option>
-        <option value="3">Pelota Amarilla</option>
-    </select>
-    <br>
-    <label for="total">Total de tu compra: </label>
-    <input type="number" id="total">
-    <br>
-	<! Crear boton>
-	<button onclick="calcularDescuento()">Calcular Descuento</button>
-    <p id="resultado"></p>
-	<! Conectar el HTML con el JavaScript>
-    <script src="Ejercicio31.js"></script>
+<body class="bg-gradient-to-br from-yellow-100 via-white to-green-100 min-h-screen flex items-center justify-center p-4">
+
+    <div class="bg-white p-6 rounded-2xl shadow-xl w-full max-w-md">
+        <h1 class="text-2xl font-bold text-center text-green-700 mb-6">Cafetería - Descuentos</h1>
+
+        <!-- Selector -->
+        <label for="opciones" class="block font-semibold text-gray-700 mb-1">Elige una opción:</label>
+        <select id="opciones" class="w-full p-2 border rounded-lg mb-4">
+            <option value="1">Pelota Verde (10% de descuento)</option>
+            <option value="2">Pelota Roja (5% de descuento)</option>
+            <option value="3">Pelota Amarilla (15% de descuento)</option>
+        </select>
+
+        <!-- Total de compra -->
+        <label for="total" class="block font-semibold text-gray-700 mb-1">Total de tu compra:</label>
+        <input type="number" id="total" class="w-full p-2 border rounded-lg mb-4" placeholder="Ingresa el total">
+
+        <!-- Botón -->
+        <button onclick="calcularDescuento()" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg transition mb-4">
+            Calcular Descuento
+        </button>
+
+        <!-- Resultado -->
+        <p id="resultado" class="text-lg text-center text-green-800 font-medium"></p>
+    </div>
+
+    <script>
+        function calcularDescuento() {
+            const opciones = document.getElementById("opciones");
+            const compraInput = document.getElementById("total");
+            const resultado1 = document.getElementById("resultado");
+
+            const opcion = parseInt(opciones.value);
+            const compra = parseFloat(compraInput.value);
+
+            if (isNaN(compra) || compra <= 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Por favor ingresa un monto válido mayor que 0.'
+                });
+                return;
+            }
+
+            let resultado = 0;
+            let mensaje = "";
+
+            // Condiciones según pelota
+            switch(opcion) {
+                case 1:
+                    resultado = compra * 0.90;
+                    mensaje = "¡Obtuviste una pelota verde! 10% de descuento.";
+                    break;
+                case 2:
+                    resultado = compra * 0.95;
+                    mensaje = "¡Obtuviste una pelota roja! 5% de descuento.";
+                    break;
+                case 3:
+                    resultado = compra * 0.85;
+                    mensaje = "¡Obtuviste una pelota amarilla! 15% de descuento.";
+                    break;
+                default:
+                    resultado1.textContent = "Opción no válida.";
+                    return;
+            }
+
+            // Imprimir resultado en pantalla
+            resultado1.textContent = `Monto total con descuento: $${resultado.toFixed(2)}`;
+
+            // Mostrar resultado en SweetAlert
+            Swal.fire({
+                icon: 'success',
+                title: 'Descuento aplicado',
+                html: `<p class="text-green-700 font-semibold">${mensaje}</p><p>Total a pagar: <strong>$${resultado.toFixed(2)}</strong></p>`
+            });
+        }
+    </script>
+
 </body>
 </html>
-
