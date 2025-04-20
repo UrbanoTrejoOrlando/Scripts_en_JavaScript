@@ -1,24 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Ejercicio32</title>
+    <meta charset="UTF-8">
+    <title>Ejercicio32 - Registro de Calificaciones</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body>
-    <h1>Registro de Calificaciones</h1>
-    <table id="tablaCalificaciones">
-        <tr>
-            <th>Materias</th>
-            <th>Unidad 1</th>
-            <th>Unidad 2</th>
-            <th>Unidad 3</th>
-            <th>Unidad 4</th>
-            <th>Unidad 5</th>
-            <th>Promedio</th>
-        </tr>
-    </table>
-    <p id="promedioGeneral"></p>
-	<! Conectar el HTML con el JavaScript>
-    <script src="Ejercicio32.js"></script>
+<body class="bg-blue-50 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white p-6 rounded-xl shadow-xl w-full max-w-5xl">
+        <h1 class="text-3xl font-bold text-center text-blue-800 mb-6">Registro de Calificaciones</h1>
+
+        <div class="overflow-auto">
+            <table id="tablaCalificaciones" class="min-w-full border border-blue-300 text-center rounded-lg">
+                <thead class="bg-blue-200 text-blue-800 font-semibold">
+                    <tr>
+                        <th class="p-2 border border-blue-300">Materia</th>
+                        <th class="p-2 border border-blue-300">Unidad 1</th>
+                        <th class="p-2 border border-blue-300">Unidad 2</th>
+                        <th class="p-2 border border-blue-300">Unidad 3</th>
+                        <th class="p-2 border border-blue-300">Unidad 4</th>
+                        <th class="p-2 border border-blue-300">Unidad 5</th>
+                        <th class="p-2 border border-blue-300">Promedio</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-800 bg-white" id="tablaBody">
+                    <!-- Datos dinámicos -->
+                </tbody>
+            </table>
+        </div>
+
+        <p id="promedioGeneral" class="mt-6 text-xl text-center text-blue-700 font-bold"></p>
+    </div>
+
+    <script>
+        const materias = [
+            "Cálculo Diferencial",
+            "Fundamentos de Programación",
+            "Química",
+            "Fundamentos de Investigación",
+            "Matemáticas Discretas",
+            "Desarrollo Sustentable"
+        ];
+
+        const tablaBody = document.getElementById("tablaBody");
+        const promedioGeneralElement = document.getElementById("promedioGeneral");
+
+        let promedioGeneral = 0;
+
+        async function capturarCalificaciones() {
+            for (let i = 0; i < materias.length; i++) {
+                let sumaMateria = 0;
+                const row = document.createElement("tr");
+                const materiaCell = document.createElement("td");
+                materiaCell.textContent = materias[i];
+                materiaCell.classList.add("p-2", "border", "border-blue-300", "font-semibold");
+                row.appendChild(materiaCell);
+
+                for (let j = 0; j < 5; j++) {
+                    const { value: calificacion } = await Swal.fire({
+                        title: `Calificación para ${materias[i]}`,
+                        text: `Unidad ${j + 1}`,
+                        input: 'number',
+                        inputLabel: 'Ingresa un número entre 0 y 100',
+                        inputAttributes: {
+                            min: 0,
+                            max: 100,
+                            step: 0.1
+                        },
+                        confirmButtonText: 'Aceptar',
+                        inputValidator: (value) => {
+                            if (!value || isNaN(value) || value < 0 || value > 100) {
+                                return 'Ingresa una calificación válida.';
+                            }
+                        },
+                        allowOutsideClick: false
+                    });
+
+                    const cal = parseFloat(calificacion);
+                    sumaMateria += cal;
+
+                    const unidadCell = document.createElement("td");
+                    unidadCell.textContent = cal;
+                    unidadCell.classList.add("p-2", "border", "border-blue-300");
+                    row.appendChild(unidadCell);
+                }
+
+                const promedioMateria = sumaMateria / 5;
+                promedioGeneral += promedioMateria;
+
+                const promedioCell = document.createElement("td");
+                promedioCell.textContent = promedioMateria.toFixed(2);
+                promedioCell.classList.add("p-2", "border", "border-blue-300", "font-bold", "text-blue-800");
+                row.appendChild(promedioCell);
+
+                tablaBody.appendChild(row);
+            }
+
+            promedioGeneral /= materias.length;
+            promedioGeneralElement.textContent = `Promedio general: ${promedioGeneral.toFixed(2)}`;
+
+            Swal.fire({
+                icon: 'success',
+                title: '¡Registro completo!',
+                text: `El promedio general de todas las materias es: ${promedioGeneral.toFixed(2)}`
+            });
+        }
+
+        // Ejecutar al cargar
+        window.onload = capturarCalificaciones;
+    </script>
 </body>
 </html>
-
