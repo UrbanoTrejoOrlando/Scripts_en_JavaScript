@@ -1,16 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Ejercicio33</title>
+    <meta charset="UTF-8">
+    <title>Ejercicio33 - Créditos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body>
-    <h1>Determinar Créditos</h1>
-    <label for="creditoTaller">Estás inscrito a un taller (1 = Si y 2 = No): </label>
-    <input type="number" id="creditoTaller">
-	<! Crear boton>
-	<button onclick="determinarCreditos()">Calcular</button>
-    <p id="resultado"></p>
-	<! Conectar el HTML con el JavaScript>
-    <script src="Ejercicio33.js"></script>
+<body class="bg-purple-50 min-h-screen flex items-center justify-center p-6">
+    <div class="bg-white shadow-xl rounded-xl p-8 max-w-xl w-full">
+        <h1 class="text-3xl font-bold text-purple-800 text-center mb-6">Determinar Créditos</h1>
+        <div class="flex flex-col gap-4">
+            <label for="creditoTaller" class="text-lg font-medium text-gray-700">
+                ¿Estás inscrito a un taller?
+                <span class="text-sm text-gray-500">(1 = Sí, 2 = No)</span>
+            </label>
+            <input type="number" id="creditoTaller" min="1" max="2" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+
+            <button onclick="determinarCreditos()" class="bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition duration-200">
+                Calcular Créditos
+            </button>
+            <p id="resultado" class="text-lg text-purple-700 font-semibold mt-4 text-center"></p>
+        </div>
+    </div>
+
+    <script>
+        async function determinarCreditos() {
+            const tallerValue = parseInt(document.getElementById("creditoTaller").value);
+            let resultado = "";
+
+            if (tallerValue !== 1 && tallerValue !== 2) {
+                Swal.fire("Opción inválida", "Debes ingresar 1 (Sí) o 2 (No)", "warning");
+                return;
+            }
+
+            if (tallerValue === 1) {
+                resultado += "Tienes un crédito.<br>";
+
+                const carrera = await Swal.fire({
+                    title: "¿Participaste en la carrera?",
+                    input: "radio",
+                    inputOptions: {
+                        1: "Sí",
+                        2: "No"
+                    },
+                    inputValidator: value => !value && "Debes seleccionar una opción"
+                });
+
+                if (carrera.value === "1") {
+                    resultado += "Tienes otro crédito.<br>";
+
+                    const lugar = await Swal.fire({
+                        title: "¿Quedaste en uno de los 3 primeros lugares?",
+                        input: "radio",
+                        inputOptions: {
+                            1: "Sí",
+                            2: "No"
+                        },
+                        inputValidator: value => !value && "Selecciona una opción"
+                    });
+
+                    if (lugar.value === "1") {
+                        resultado += "🎉 Genial, tienes <strong>tres créditos</strong>.";
+                    } else {
+                        resultado += "Tienes <strong>dos créditos</strong>.";
+                    }
+                } else {
+                    resultado += "Tienes <strong>solo un crédito</strong>.";
+                }
+            } else {
+                resultado += "⚠️ Inscríbete a un taller por favor.<br>";
+
+                const carrera = await Swal.fire({
+                    title: "¿Participaste en la carrera?",
+                    input: "radio",
+                    inputOptions: {
+                        1: "Sí",
+                        2: "No"
+                    },
+                    inputValidator: value => !value && "Debes seleccionar una opción"
+                });
+
+                if (carrera.value === "1") {
+                    resultado += "Tienes un crédito.<br>";
+
+                    const lugar = await Swal.fire({
+                        title: "¿Quedaste en uno de los 3 primeros lugares?",
+                        input: "radio",
+                        inputOptions: {
+                            1: "Sí",
+                            2: "No"
+                        },
+                        inputValidator: value => !value && "Selecciona una opción"
+                    });
+
+                    if (lugar.value === "1") {
+                        resultado += "Tienes <strong>dos créditos</strong>.";
+                    } else {
+                        resultado += "Tienes <strong>un crédito</strong>.";
+                    }
+                } else {
+                    resultado += "😢 No tienes ningún crédito.";
+                }
+            }
+
+            document.getElementById("resultado").innerHTML = resultado;
+        }
+    </script>
 </body>
 </html>
