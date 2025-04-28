@@ -3,11 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Ejercicio 12 - Cálculo de Intereses</title>
-
-    <!-- TailwindCSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
@@ -28,7 +24,6 @@
         <button onclick="calcularIntereses()" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition duration-300">
             Calcular Intereses
         </button>
-
         <!-- Resultado debajo del botón -->
         <div id="resultados" class="mt-6 text-gray-800 space-y-1 text-sm"></div>
     </div>
@@ -60,10 +55,8 @@
                 mensajeHTML += `<p>${interes}</p>`;
                 mensajeAlerta += `Año ${i}: $${prestamo.toFixed(2)}<br>`;
             }
-
             // Mostrar en la página
             resultadosDiv.innerHTML = mensajeHTML;
-
             // Mostrar con SweetAlert
             Swal.fire({
                 title: 'Intereses Acumulados',
@@ -73,6 +66,5 @@
             });
         }
     </script>
-
 </body>
 </html>
