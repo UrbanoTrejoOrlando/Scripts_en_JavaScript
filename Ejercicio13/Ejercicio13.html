@@ -19,8 +19,7 @@
         <button onclick="calcularPrecio()" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition duration-300">
             Calcular Precio
         </button>
-
-        <!-- Resultado debajo del botón -->
+        <!--Resultado debajo del botón -->
         <p id="resultado" class="mt-6 text-gray-800 text-center font-semibold"></p>
     </div>
 
@@ -39,10 +38,8 @@
                 resultadoP.textContent = "";
                 return;
             }
-
             const total = precioPorKm * kilometros;
             resultadoP.textContent = `El precio del boleto es de: $${total.toFixed(2)}`;
-
             Swal.fire({
                 icon: 'info',
                 title: 'Precio del boleto',
@@ -51,6 +48,5 @@
             });
         }
     </script>
-
 </body>
 </html>
