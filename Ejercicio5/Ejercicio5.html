@@ -3,17 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Ejercicio 5 - Número de Ventas</title>
-
-  <!-- TailwindCSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
 
   <div class="bg-white p-10 rounded-2xl shadow-lg w-full max-w-xl text-center">
-    <h1 class="text-3xl font-bold text-indigo-600 mb-6">🧾 Número de Ventas</h1>
+    <h1 class="text-3xl font-bold text-indigo-600 mb-6">Número de Ventas</h1>
 
     <label for="ventas" class="block text-left font-semibold text-gray-700 mb-2">Número de ventas:</label>
     <input 
@@ -27,8 +23,7 @@
 
     <button 
       onclick="calcularTotales()" 
-      class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg transition"
-    >
+      class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg transition">
       Calcular Totales
     </button>
 
@@ -90,11 +85,11 @@
         if (precio < 1000) totalMenor1000 += precio;
       }
 
-      document.getElementById("totalFinal").textContent = `💰 Total Final: $${totalFinal.toFixed(2)}`;
-      document.getElementById("totalMenor1000").textContent = `🧾 Total de ventas menores a $1000: $${totalMenor1000.toFixed(2)}`;
+      document.getElementById("totalFinal").textContent = `Total Final: $${totalFinal.toFixed(2)}`;
+      document.getElementById("totalMenor1000").textContent = `Total de ventas menores a $1000: $${totalMenor1000.toFixed(2)}`;
 
       Swal.fire({
-        title: "✅ Totales Calculados",
+        title: "Totales Calculados",
         html: `<p>Total: <strong>$${totalFinal.toFixed(2)}</strong></p><p>Menores a $1000: <strong>$${totalMenor1000.toFixed(2)}</strong></p>`,
         icon: "success",
         confirmButtonColor: "#6366f1"
