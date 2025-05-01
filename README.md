@@ -46,6 +46,7 @@ Por ejemplo, si tienes un archivo ejemplo.html que muestra un contador, podrías
     Revisar el <script> dentro del HTML para entender cómo funciona.
 
 ## Estructura del proyecto
+```bash
 Scripts_en_JavaScript/
 ├── Ejercicio1/
 │   └── ejercicio1.html
@@ -56,4 +57,5 @@ Scripts_en_JavaScript/
 │   └── ejercicio33.html
 ├── LICENSE
 └── README.md
+```
 
