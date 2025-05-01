@@ -6,7 +6,7 @@ Este repositorio contiene archivos HTML con scripts de JavaScript embebidos que 
 - [Instalación](#instalación)
 - [Uso](#Uso)
 - [Estructura del Repositorio](#estructura-del-repositorio)
-- [Ejecucion](#Ejecución-del-proyecto)
+- [Ejecución](#Ejecución-del-proyecto)
 - [Contribuir](#contribuir)
 - [Licencia](#licencia)
 - [Contacto](#contacto)
@@ -61,3 +61,18 @@ Scripts_en_JavaScript/
 ```
 ## Ejecución del proyecto
 No requiere servidor ni instalación adicional. Solo abre cualquier archivo .html en tu navegador.
+
+## Contribuir
+Las contribuciones son bienvenidas. Si deseas aportar mejoras o nuevos ejercicios:
+
+    1. Haz un fork del repositorio.
+
+    2. Crea una rama: git checkout -b mejora-ejercicio
+
+    3. Realiza tus cambios y haz commit: git commit -m "Agrega nuevo ejercicio"
+
+    4. Haz push a tu rama: git push origin mejora-ejercicio
+
+    5. Abre un Pull Request.
+
+
