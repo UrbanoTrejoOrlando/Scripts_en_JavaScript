@@ -77,4 +77,7 @@ Las contribuciones son bienvenidas. Si deseas aportar mejoras o nuevos ejercicio
 
 ## Licencia
 
-Este repositorio está licenciado bajo la GNU General Public License v3.0.
+Este proyecto está licenciado bajo la [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html).
+
+Los permisos de esta licencia de copyleft fuerte están condicionados a poner a disposición el código fuente completo de las obras licenciadas y sus modificaciones, incluyendo obras más grandes que utilicen una obra licenciada, bajo la misma licencia. Deben conservarse los avisos de copyright y licencia.  
+Los contribuyentes otorgan una concesión expresa de derechos de patente.
