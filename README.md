@@ -9,7 +9,6 @@ Este repositorio contiene archivos HTML con scripts de JavaScript embebidos que 
 - [Ejecución](#Ejecución-del-proyecto)
 - [Contribuir](#contribuir)
 - [Licencia](#licencia)
-- [Contacto](#contacto)
 
 ### Características
 - **Ejemplos Prácticos**: Cada archivo HTML muestra una funcionalidad específica de JavaScript.
