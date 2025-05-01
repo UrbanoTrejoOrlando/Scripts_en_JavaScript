@@ -1,2 +1,2 @@
 # Scripts_en_JavaScript
-Scripts realizados en JavaScript
+Bienvenido al repositorio Scripts_en_JavaScript, una colección de scripts útiles y prácticos escritos en JavaScript. Este repositorio contiene una variedad de scripts diseñados para tareas comunes, automatización, y aprendizaje del lenguaje JavaScript. Ya seas un principiante buscando ejemplos claros o un desarrollador experimentado en busca de soluciones reutilizables, ¡aquí encontrarás algo útil!
