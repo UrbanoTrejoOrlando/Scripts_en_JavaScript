@@ -6,6 +6,7 @@ Este repositorio contiene archivos HTML con scripts de JavaScript embebidos que 
 - [Instalación](#instalación)
 - [Uso](#Uso)
 - [Estructura del Repositorio](#estructura-del-repositorio)
+- [Ejecucion](#Ejecución-del-proyecto)
 - [Contribuir](#contribuir)
 - [Licencia](#licencia)
 - [Contacto](#contacto)
@@ -45,7 +46,7 @@ Por ejemplo, si tienes un archivo ejemplo.html que muestra un contador, podrías
     Hacer clic en un botón para incrementar el contador.
     Revisar el <script> dentro del HTML para entender cómo funciona.
 
-## Estructura del proyecto
+## Estructura del Repositorio
 ```bash
 Scripts_en_JavaScript/
 ├── Ejercicio1/
@@ -58,4 +59,5 @@ Scripts_en_JavaScript/
 ├── LICENSE
 └── README.md
 ```
-
+## Ejecución del proyecto
+No requiere servidor ni instalación adicional. Solo abre cualquier archivo .html en tu navegador.
