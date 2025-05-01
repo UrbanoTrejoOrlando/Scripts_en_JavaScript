@@ -4,7 +4,7 @@ Este repositorio contiene archivos HTML con scripts de JavaScript embebidos que 
 ## Tabla de Contenidos
 - [Descripción](#Descripción)
 - [Instalación](#instalación)
-- [Uso](#uso)
+- [Uso](#Uso)
 - [Estructura del Repositorio](#estructura-del-repositorio)
 - [Contribuir](#contribuir)
 - [Licencia](#licencia)
@@ -26,13 +26,13 @@ No se requiere instalación especial, ya que los archivos son HTML y se ejecutan
 ### Pasos
 1. Clona el repositorio:
    ```bash
-      git clone https://github.com/UrbanoTrejoOrlando/Scripts_en_JavaScript.git
+   git clone https://github.com/UrbanoTrejoOrlando/Scripts_en_JavaScript.git
    ```
 2. Navegar al directorio del proyecto
    ```bash
-      cd Scripts_en_JavaScript
+   cd Scripts_en_JavaScript
    ```
-## uso
+## Uso
 Cada archivo HTML es un ejemplo independiente que demuestra una funcionalidad de JavaScript. Para usar un ejemplo:
 
     Abre el archivo .html en un navegador.
@@ -44,3 +44,16 @@ Por ejemplo, si tienes un archivo ejemplo.html que muestra un contador, podrías
     Abrir ejemplo.html en Chrome.
     Hacer clic en un botón para incrementar el contador.
     Revisar el <script> dentro del HTML para entender cómo funciona.
+
+## Estructura del proyecto
+Scripts_en_JavaScript/
+├── Ejercicio1/
+│   └── ejercicio1.html
+├── Ejercicio2/
+│   └── ejercicio2.html
+├── ...
+├── Ejercicio33/
+│   └── ejercicio33.html
+├── LICENSE
+└── README.md
+
