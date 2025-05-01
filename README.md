@@ -75,4 +75,6 @@ Las contribuciones son bienvenidas. Si deseas aportar mejoras o nuevos ejercicio
 
     5. Abre un Pull Request.
 
+## Licencia
 
+Este repositorio está licenciado bajo la GNU General Public License v3.0.
