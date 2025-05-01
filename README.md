@@ -26,9 +26,21 @@ No se requiere instalación especial, ya que los archivos son HTML y se ejecutan
 ### Pasos
 1. Clona el repositorio:
    ```bash
-    git clone https://github.com/UrbanoTrejoOrlando/Scripts_en_JavaScript.git
+      git clone https://github.com/UrbanoTrejoOrlando/Scripts_en_JavaScript.git
    ```
 2. Navegar al directorio del proyecto
-  ```bash
-  cd Scripts_en_JavaScript
-  ``` 
+   ```bash
+      cd Scripts_en_JavaScript
+   ```
+## uso
+Cada archivo HTML es un ejemplo independiente que demuestra una funcionalidad de JavaScript. Para usar un ejemplo:
+
+    Abre el archivo .html en un navegador.
+    Interactúa con la página para ver el script en acción (por ejemplo, haciendo clic en botones o ingresando datos).
+    Inspecciona el código fuente (clic derecho > "Ver código fuente" o usa las herramientas de desarrollador) para estudiar el JavaScript embebido.
+
+Por ejemplo, si tienes un archivo ejemplo.html que muestra un contador, podrías:
+
+    Abrir ejemplo.html en Chrome.
+    Hacer clic en un botón para incrementar el contador.
+    Revisar el <script> dentro del HTML para entender cómo funciona.
